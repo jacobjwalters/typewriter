@@ -1,7 +1,11 @@
 local utf8 = require("utf8")
 
--- Load user config
-love.filesystem.load("config.lua")()
+-- Default configuration
+fontSize = 18
+margin = 50
+maxWidth = 700
+scrollSensitivity = 100
+scrollVelocity = 5
 
 -- Internal editor state
 yPos = 0
@@ -89,7 +93,7 @@ end
 function love.update(dt)
     -- Gradually reduce velocity to create a smooth scrolling effect.
     yPos = math.min(0, yPos + yVel * dt)
-    yVel = yVel - yVel * math.min(dt * 5, 1)
+    yVel = yVel - yVel * math.min(dt * scrollVelocity, 1)
 end
 
 function love.draw()
@@ -104,4 +108,7 @@ function love.quit()
     love.filesystem.write(filename, text)
     love.event.quit()
 end
+
+-- Load user config
+love.filesystem.load("config.lua")()
 
