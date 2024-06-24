@@ -47,6 +47,9 @@ function love.keypressed(key)
     if key == "escape" then
         love.event.quit()
 
+    elseif love.keyboard.isDown("lctrl", "rctrl") and key == "s" then
+        love.filesystem.write(filename, text)
+
     -- Toggle fullscreen
     elseif key == "f11" then
         love.window.setFullscreen(not love.window.getFullscreen())
